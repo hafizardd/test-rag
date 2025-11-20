@@ -23,6 +23,10 @@ The system combines:
 
 You can access it on chrome/browser (will be work if you've done clone this repo) :
 - http://192.168.100.6:8501
+  
+Demo Simple
+
+<img src="Assets/UI_simple_rag.png" width="max">
 
 ---
 
