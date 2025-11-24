@@ -11,6 +11,7 @@ import faiss
 
 from groq import Groq
 from sentence_transformers import SentenceTransformer
+from docx import Document
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -82,6 +83,62 @@ def make_context(chunks: List[DocChunk]) -> str:
         header = f"[{ch.doc_id} | {ch.meta.get('category', 'unknown')}]\n"
         parts.append(header + ch.text.strip())
     return "\n\n---\n\n".join(parts)
+
+def enhanced_retrieval(
+    index,
+    docs,
+    query: str,
+    embed_model,
+    k: int = 5,
+    rerank: bool = True,
+):
+    """Enhanced retrieval with basic reranking"""
+
+    # Embed query pakai model yang dikirim dari streamlit_app
+    query_vec = embed_model.encode([query], convert_to_numpy=True)
+
+    # Ambil 2x jumlah dokumen dari FAISS untuk bahan rerank
+    D, I = search_index(index, query_vec, k=k * 2)
+
+    raw_docs = []
+    for score, idx in zip(D[0], I[0]):
+        if idx < 0:
+            continue
+        raw_docs.append((docs[idx], score))
+
+    if rerank:
+        query_words = set(query.lower().split())
+        scored_docs = []
+
+        for doc, similarity_score in raw_docs:
+            doc_words = set(doc.text.lower().split())
+            keyword_overlap = len(query_words.intersection(doc_words)) / max(1, len(query_words))
+
+            combined_score = 0.7 * similarity_score + 0.3 * keyword_overlap
+
+            scored_docs.append(
+                {
+                    "document": doc,
+                    "similarity_score": float(similarity_score),
+                    "keyword_score": keyword_overlap,
+                    "combined_score": combined_score,
+                    "content": doc.text,
+                    "metadata": doc.meta,
+                }
+            )
+
+        scored_docs.sort(key=lambda x: x["combined_score"], reverse=True)
+        return scored_docs[:k]
+
+    return [
+        {
+            "document": doc,
+            "similarity_score": float(score),
+            "content": doc.text,
+            "metadata": doc.meta,
+        }
+        for doc, score in raw_docs[:k]
+    ]
 
 def answer_with_rag(query: str, retrieved: List[DocChunk], chat_model: str) -> str:
     """Generate an answer using the retrieved pdf snippets and the chosen chat model."""
