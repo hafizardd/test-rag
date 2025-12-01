@@ -1,0 +1,988 @@
+[
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 0,
+    "text": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n \nMENINGKATKAN\n \nSKOR\n \nRELEVANSI\n \nPADA\n \nTOPIK\n \nBERITA\n \nDEMO\n \nDI\n \nINDONESIA\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nAMELIA\n \nSYAHLA\n \nAURELLIA\n \nSAMBUDI\n \n23/512057/P A/21866\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nPROGRAM\n \nSTUDI\n \nILMU\n \nKOMPUTER\n \nDEP ARTEMEN\n \nILMU\n \nKOMPUTER\n \nDAN\n \nELEKTRONIKA\n \nFAKUL TAS\n \nMATEMA TIKA\n \nDAN\n \nILMU\n \nPENGET AHUAN\n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 0,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 1,
+    "text": "memahami\n \nopini\n \npublik,\n \ntren\n \nsosial,\n \ndan\n \nisu-isu\n \naktual.\n \nNamun,\n \nvolume\n \ndan\n \nkeragaman\n \ndata\n \nyang\n \ntinggi\n \nmenyebabkan\n \nanalisis\n \nmanual\n \nmenjadi\n \ntidak\n \nefisien.\n \nOleh\n \nkarena\n \nitu,\n \ndiperlukan\n \npendekatan\n \notomatis\n \nseperti\n \ntopic\n \nmodeling\n \nuntuk\n \nmengekstraksi\n \ntopik-topik\n \nutama\n \nyang\n \nterkandung\n \ndalam\n \nteks\n \nsecara\n \nsistematis.\n \n \nSalah\n \nsatu\n \nmetode\n \ntopic\n \nmodeling\n \nyang\n \npaling\n \npopuler\n \nadalah\n \nLatent\n \nDirichlet\n \nAllocation\n ",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 1,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 2,
+    "text": "pada\n \nteks\n \nberbahasa\n \nIndonesia\n \nyang\n \nmemiliki\n \nbanyak\n \nsinonim\n \ndan\n \nvariasi\n \nlinguistik.\n \n \nUntuk\n \nmengatasi\n \npermasalahan\n \ntersebut,\n \npendekatan\n \nHybrid\n \nTopic\n \nModeling\n \ndikembangkan\n \ndengan\n \nmengintegrasikan\n \nLDA\n \ndengan\n \nGloVe\n \n(\nGlobal\n \nVectors\n \nfor\n \nWord\n \nRepresentation\n).\n \nIntegrasi\n \nini\n \nmemanfaatkan\n \nkekuatan\n \nembedding\n \nsemantik\n \nGloVe\n \nuntuk\n \nmenangkap\n \nmakna\n \nkata\n \nberdasarkan\n \nkonteks\n \nglobalnya,\n \nsehingga\n \nmeningkatkan\n \nkualitas\n \nd",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 2,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 3,
+    "text": "Bagaimana\n \npenerapan\n \nmodel\n \nLDA\n \ndalam\n \npemodelan\n \ntopik\n \nartikel\n \nberita\n \nIndonesia?\n \n2.\n \nBagaimana\n \ncara\n \nmengintegrasikan\n \nmodel\n \nGloVe\n \nke\n \ndalam\n \nproses\n \nLDA\n \nuntuk\n \nmembentuk\n \npendekatan\n \nHybrid\n \nTopic\n \nModeling?\n \n3.\n \nApakah\n \npendekatan\n \nHybrid\n \nLDA–GloVe\n \nmampu\n \nmeningkatkan\n \nnilai\n \ncoherence\n \nscore\n \ndibandingkan\n \nLDA\n \nkonvensional?\n  \n1.3\n \nTujuan\n \nPenelitian\n \nTujuan\n \npenelitian\n \nini\n \nadalah:\n \n1.\n \nMenerapkan\n \nmetode\n \nLDA\n \nuntuk\n \nmenganali",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 3,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 4,
+    "text": "sebagai\n \nberikut:\n \n1.\n \nManfaat\n \nAkademik:\n \nMenjadi\n \nreferensi\n \npengembangan\n \nmetode\n \ntopic\n \nmodeling\n \nberbasis\n \nsemantik\n \nuntuk\n \nbahasa\n \nIndonesia.\n \n2.\n \nManfaat\n \nPraktis:\n \nMembantu\n \npeneliti,\n \njurnalis,\n \ndan\n \nanalis\n \nmedia\n \ndalam\n \nmemahami\n \nisu-isu\n \nutama\n \nyang\n \nberkembang\n \nmelalui\n \nanalisis\n \ntopik\n \notomatis.\n \n3.\n \nManfaat\n \nTeknologis:\n \nMemberikan\n \nkontribusi\n \nterhadap\n \npengembangan\n \nsistem\n \nanalisis\n \nteks\n \nyang\n \nlebih\n \nakurat\n \ndan\n \ninterpretatif\n ",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 4,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 5,
+    "text": "BERT.\n \n3.\n \nEvaluasi\n \nmodel\n \nhanya\n \nmenggunakan\n \nmetrik\n \nCoherence\n \nScore\n \n(C_v)\n \nuntuk\n \nmenilai\n \nkualitas\n \ntopik.\n \n \n \n \n  \n \nBAB\n \nII\n \nLITERATURE\n \nREVIEW\n \n \nSaat\n \nini\n \npenelitian\n \ndalam\n \nbidang\n \ntopic\n \nmodeling\n \ndan\n \nsentiment\n \nanalysis\n \nmenunjukkan\n \nadanya\n \nkemajuan\n \nsignifikan\n \ndengan\n \npergeseran\n \ndari\n \nmetode\n \ntradisional\n \nberbasis\n \nstatistik\n \nke\n \nmodel\n \ndeep\n \nlearning\n \ndan\n \nlarge\n \nlanguage\n \nmodels\n \n(LLMs).\n \nPachlore\n \ndan\n \nChakkarwar\n \n(2023)\n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 5,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 6,
+    "text": "terbukti\n \nmeningkatkan\n \nkualitas\n \nrepresentasi\n \nteks,\n \nkarena\n \nembedding\n \ntersebut\n \nmampu\n \nmenangkap\n \nkonteks\n \nsemantik\n \nyang\n \nlebih\n \ndalam\n \ndibanding\n \npendekatan\n \nberbasis\n \nfrekuensi\n \nsemata.\n \nBeberapa\n \npeneliti\n \njuga\n \nmenyebutkan\n \nbahwa\n \npendekatan\n \nhibrid\n \nberbasis\n \nDirichlet\n \nMultinomial\n \nMixture\n \ndiajukan\n \nuntuk\n \nmengatasi\n \nketerbatasan\n \nteks\n \npendek,\n \ndan\n \nMahmud\n \ndkk.\n \n(2022)\n \nmenjelaskan\n \nbahwa\n \nmodel\n \nini\n \nmampu\n \nmengurangi\n \nnoise\n \ndalam\n ",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 6,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 7,
+    "text": "bahwa\n \nmereka\n \nmenggunakan\n \nCNN\n \ndengan\n \nembedding\n \nGloVe\n \nuntuk\n \nmelakukan\n \nanalisis\n \nteks\n \nBangla\n \ndan\n \nhasilnya\n \nmemperlihatkan\n \npeningkatan\n \nperforma\n \ndibanding\n \nmetode\n \nbaseline.\n \nSementara\n \nitu,\n \nAbdillah\n \ndan\n \nHasmawati\n \n(2023)\n \nmenunjukkan\n \ndalam\n \nstudinya\n \nbahwa\n \nCNN\n \njuga\n \ndapat\n \nditerapkan\n \nsecara\n \nefektif\n \nuntuk\n \nmenganalisis\n \nulasan\n \nnovel\n \nIndonesia,\n \nsehingga\n \nmembuktikan\n \nfleksibilitas\n \npendekatan\n \nberbasis\n \njaringan\n \nsaraf\n \nkonvolu",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 7,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 8,
+    "text": "berbasis\n \nvektor.\n \nPeneliti\n \nlain,\n \nseperti\n \nMurfi\n \ndkk.\n \n(2022),\n \nmenegaskan\n \nbahwa\n \npendekatan\n \nBi-LSTM\n \ndan\n \nBERT\n \nmampu\n \ndigunakan\n \nsecara\n \nefektif\n \ndalam\n \nmendeteksi\n \nemosi,\n \nsementara\n \nNasution\n \ndan\n \nOnan\n \n(2024)\n \nmenunjukkan\n \nefektivitas\n \nkeduanya\n \ndalam\n \nanalisis\n \nsentimen\n \nbahasa\n \nIndonesia.\n \nDengan\n \ndemikian,\n \ndapat\n \ndikatakan\n \nbahwa\n \ndeep\n \nlearning\n \ntelah\n \nmemperluas\n \njangkauan\n \nserta\n \nmeningkatkan\n \nakurasi\n \ndalam\n \nbidang\n \nini.\n \n Perke",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 8,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 9,
+    "text": "yang\n \nmereka\n \nkembangkan,\n \nmampu\n \nmemberikan\n \nkeluaran\n \ntopik\n \nyang\n \nlebih\n \nsesuai\n \ndengan\n \nkebutuhan\n \npraktis\n \npeneliti\n \nsosial.\n \nLebih\n \nlanjut,\n \nMa\n \ndkk.\n \n(2025)\n \nmelalui\n \nCAST\n \nmemperkenalkan\n \npendekatan\n \nself-similarity\n \nuntuk\n \nmeningkatkan\n \nkualitas\n \ntopik,\n \nsehingga\n \nmenunjukkan\n \nbagaimana\n \nteknik\n \nbaru\n \ndapat\n \nmengoptimalkan\n \nstruktur\n \nrepresentasi\n \ndalam\n \npemodelan\n \ntopik.\n \nDi\n \nsisi\n \nlain,\n \nMorstatter\n \ndan\n \nLiu\n \n(2016)\n \nmenekankan\n \nbahwa\n ",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 9,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 10,
+    "text": "pemodelan\n \ntopik.\n \n \nAplikasi\n \ntopic\n \nmodeling\n \ndan\n \nsentiment\n \nanalysis\n \nkini\n \nsemakin\n \nluas\n \ndan\n \nmencakup\n \nberbagai\n \ndomain.\n \nAhammad\n \n(2024)\n \nsecara\n \nlangsung\n \nmeneliti\n \npenerapan\n \nmetode\n \nini\n \ndalam\n \nidentifikasi\n \nhoaks\n \nCOVID-19,\n \ndan\n \nhasil\n \npenelitiannya\n \nmenunjukkan\n \nefektivitas\n \nyang\n \ntinggi\n \ndalam\n \nmemilah\n \ninformasi\n \npalsu.\n \nDi\n \nIndonesia,\n \nA’la\n \n(2022)\n \nmendeskripsikan\n \nbagaimana\n \nsentiment\n \nanalysis\n \ndigunakan\n \ndalam\n \nmenganalisis\n \nu",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 10,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 11,
+    "text": "dkk.\n \n(2024)\n \nmenegaskan\n \nbahwa\n \nanalisis\n \nwacana\n \npolitik,\n \nkhususnya\n \npemilu\n \n2024,\n \njuga\n \nmendapatkan\n \nmanfaat\n \ndari\n \nkombinasi\n \ntopic\n \nmodeling\n \ndan\n \nsentiment\n \nanalysis.\n \nTidak\n \nhanya\n \nitu,\n \nRamadhan\n \n(2021)\n \nmemaparkan\n \nhasil\n \nmenjanjikan\n \ndari\n \npenerapan\n \nWord2Vec\n \ndan\n \nKNN\n \npada\n \nberita\n \nonline\n \nIndonesia,\n \nyang\n \nmenegaskan\n \nbahwa\n \nmetode\n \nklasik\n \nberbasis\n \npembelajaran\n \nmesin\n \nmasih\n \nrelevan\n \njika\n \ndipadukan\n \ndengan\n \nrepresentasi\n \nmoder",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 11,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 12,
+    "text": "Anistya\n \ndan\n \nSetiawan\n \n(2021),\n \nAfra\n \ndkk.\n \n(2022),\n \nLi\n \ndkk.\n \n(2022),\n \nRosid\n \ndkk.\n \n(2022),\n \nThielmann\n \ndkk.\n \n(2023),\n \nserta\n \nWibowo\n \ndkk.\n \n(2024),\n \nyang\n \nmasing-masing\n \nmenunjukkan\n \nbagaimana\n \ninterpretabilitas\n \nmemainkan\n \nperan\n \nkunci\n \ndalam\n \nmenjembatani\n \nkesenjangan\n \nantara\n \nmodel\n \ndan\n \npengguna.\n \nPurwarianti\n \ndkk.\n \n(2019)\n \njuga\n \nmenekankan\n \npentingnya\n \nmemperluas\n \naplikasi\n \nteknik\n \nini\n \ntidak\n \nhanya\n \ndalam\n \nbidang\n \nakademik,\n \ntetapi\n \njuga",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 12,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 13,
+    "text": "unsupervised\n \nlearning\n \nyang\n \ndigunakan\n \nuntuk\n \nmengekstraksi\n \ntopik\n \ntersembunyi\n \ndalam\n \nkumpulan\n \ndokumen\n \n(Blei,\n \nNg\n \ndan\n \nJordan,\n \n2003).\n \nSalah\n \nsatu\n \nmodel\n \npaling\n \npopuler\n \nadalah\n \nLatent\n \nDirichlet\n \nAllocation\n \n(LDA),\n \nyang\n \nmemandang\n \nsetiap\n \ndokumen\n \nsebagai\n \ncampuran\n \ndari\n \nbeberapa\n \ntopik\n \ndan\n \nsetiap\n \ntopik\n \nsebagai\n \ndistribusi\n \nkata.\n \nModel\n \nini\n \nmenggunakan\n \npendekatan\n \nprobabilistik\n \ndi\n \nmana\n \nsetiap\n \nkata\n \ndalam\n \ndokumen\n \ndiasu",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 13,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 14,
+    "text": "utama\n \ndari\n \nberita\n \natau\n \nartikel\n \nilmiah\n \nberbahasa\n \nIndonesia.\n \nNamun,\n \nmetode\n \nini\n \nmemiliki\n \nkelemahan\n \nkarena\n \ntidak\n \nmemperhitungkan\n \nkonteks\n \nsemantik\n \ndan\n \nurutan\n \nkata\n \n(Geeganage,\n \nXu\n \ndan\n \nLi,\n \n2024).\n \nSelain\n \nitu,\n \nLDA\n \nsensitif\n \nterhadap\n \njumlah\n \ntopik\n \ndan\n \nparameter\n \nDirichlet\n \nyang\n \ndigunakan,\n \nsehingga\n \nhasil\n \nyang\n \ndiperoleh\n \nsering\n \nbervariasi\n \n(Alsmadi\n \net\n \nal.,\n \n2024).\n \nUntuk\n \nmengatasi\n \nketerbatasan\n \ntersebut,\n \npenelitian",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 14,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 15,
+    "text": "embeddings\n \nmodern\n \nseperti\n \nGloVe\n \natau\n \nBERT\n \n(Pham\n \net\n \nal.,\n \n2024).\n \nIntegrasi\n \nini\n \nbertujuan\n \nmengatasi\n \nketerbatasan\n \nLDA\n \nyang\n \ntidak\n \nmempertimbangkan\n \nhubungan\n \nsemantik\n \nantar\n \nkata.\n \nMenurut\n \nPachlore\n \ndan\n \nChakkarwar\n \n(2023),\n \npendekatan\n \nhibrid\n \nberbasis\n \nLDA-GloVe\n \ndapat\n \nmenghasilkan\n \ntopik\n \nyang\n \nlebih\n \nrelevan\n \ndan\n \ninterpretatif\n \ndibandingkan\n \nLDA\n \nmurni.\n \n \nPenelitian\n \noleh\n \nGeeganage\n \net\n \nal.\n \n(2024)\n \nmenunjukkan\n \nbahwa\n \nSem",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 15,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 16,
+    "text": "relevan\n \nkarena\n \nteks\n \nberita\n \nsering\n \nmengandung\n \nsinonimi\n \ndan\n \nvariasi\n \nbahasa\n \nyang\n \ntinggi,\n \nsehingga\n \nintegrasi\n \nsemantik\n \ndapat\n \nmembantu\n \nmodel\n \nmemahami\n \nhubungan\n \nantar\n \nistilah\n \nsecara\n \nlebih\n \nalami\n \n(Aryani\n \net\n \nal.,\n \n2024).\n \n3.3\n \nGloVe\n \n(\nGlobal\n \nVectors\n \nfor\n \nWord\n \nRepresentation\n)\n \nGloVe\n \n(\nGlobal\n \nVectors\n \nfor\n \nWord\n \nRepresentation\n)\n \nmerupakan\n \nmetode\n \nword\n \nembedding\n \nyang\n \ndikembangkan\n \noleh\n \nPennington,\n \nSocher\n \ndan\n \nManning",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 16,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 17,
+    "text": "yang\n \nberdekatan.\n \n \nDalam\n \npenelitian\n \nterbaru,\n \nGloVe\n \nterbukti\n \nefektif\n \nuntuk\n \nanalisis\n \nsentimen\n \ndan\n \npemodelan\n \ntopik\n \ndalam\n \nbahasa\n \nnon-Inggris,\n \ntermasuk\n \nIndonesia\n \n(Rahmadzani\n \net\n \nal.,\n \n2020;\n \nMahmud\n \net\n \nal.,\n \n2022).\n \nAbdillah\n \ndan\n \nHasmawati\n \n(2023)\n \nmenunjukkan\n \nbahwa\n \nGloVe\n \nmenghasilkan\n \nakurasi\n \nyang\n \nlebih\n \ntinggi\n \ndibandingkan\n \nTF-IDF\n \ndalam\n \nanalisis\n \nopini\n \npolitik\n \nIndonesia.\n \nIntegrasi\n \nGloVe\n \ndengan\n \nLDA\n \njuga\n \nterbukti",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 17,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 18,
+    "text": "matriks\n \nco-occurrence\n \nyang\n \nmencatat\n \nseberapa\n \nsering\n \nsetiap\n \nkata\n \nmuncul\n \nbersama\n \nkata\n \nlain\n \ndalam\n \nsuatu\n \nkorpus.\n \nSetiap\n \nelemen\n \npada\n \nmatriks\n \ntersebut\n \nmenunjukkan\n \nfrekuensi\n \nkemunculan\n \nbersama\n \nantara\n \ndua\n \nkata\n \ndalam\n \nkonteks\n \ntertentu.\n \n \nKedua,\n \nGloVe\n \nmenerapkan\n \nfungsi\n \npembobot\n \n(weighting\n \nfunction)\n \nuntuk\n \nmenyesuaikan\n \nkontribusi\n \ndari\n \npasangan\n \nkata\n \nberdasarkan\n \nfrekuensi\n \nkemunculannya.\n \nKata\n \nyang\n \nsangat\n \nsering\n \nm",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 18,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 19,
+    "text": "aktual\n \ndan\n \nhasil\n \nperkalian\n \nvektor\n \nkata\n \ndengan\n \nvektor\n \nkonteksnya.\n \nMelalui\n \nproses\n \npembelajaran\n \nini,\n \nGloVe\n \nmenghasilkan\n \nvektor\n \nrepresentasi\n \nuntuk\n \nsetiap\n \nkata\n \nsehingga\n \nhubungan\n \nsemantik\n \ndapat\n \ndipetakan\n \nsecara\n \nlinier.\n \nMisalnya,\n \nperbedaan\n \nvektor\n \nantara\n \n“raja”\n \ndan\n \n“ratu”\n \nmemiliki\n \narah\n \nyang\n \nserupa\n \ndengan\n \nperbedaan\n \nantara\n \n“pria”\n \ndan\n \n“wanita”.\n \n \n \nGambar\n \n1.\n \nArsitektur\n \nGlove\n \n(Sumber:\n \n[1])\n \n \nDilihat\n \ndari\n \n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 19,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 20,
+    "text": "semantik\n \nglobal\n \nantar\n \nkata\n \nsecara\n \nefisien\n \ndan\n \nstabil\n \ndibandingkan\n \nmodel\n \nberbasis\n \nkonteks\n \nlokal.\n \n \n3.4\n \nCoherence\n \nScore\n \nCoherence\n \nscore\n \ndigunakan\n \nuntuk\n \nmengukur\n \nkualitas\n \ntopik\n \nyang\n \ndihasilkan\n \noleh\n \nmodel\n \ntopic\n \nmodeling\n \n(Mimno\n \net\n \nal.,\n \n2011).\n \nNilai\n \nkoherensi\n \nmenggambarkan\n \nsejauh\n \nmana\n \nkata-kata\n \ndalam\n \nsuatu\n \ntopik\n \nmemiliki\n \nketerkaitan\n \nsemantik\n \nyang\n \nkuat.\n \nDalam\n \nkonteks\n \nevaluasi\n \nLDA,\n \nmetrik\n \nseperti\n \nC_",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 20,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 21,
+    "text": "(2016)\n \nmenyarankan\n \npenggunaan\n \nmetrik\n \ncoherence-based\n \nevaluation\n \nuntuk\n \nmenghindari\n \nketergantungan\n \nterhadap\n \nukuran\n \nprobabilitas\n \nsemata.\n \nPada\n \nkonteks\n \nartikel\n \nberita\n \nIndonesia,\n \npeningkatan\n \ncoherence\n \nscore\n \nsangat\n \npenting\n \nkarena\n \nbahasa\n \nyang\n \ndigunakan\n \nsering\n \nbersifat\n \nidiomatik\n \ndan\n \nkontekstual,\n \nsehingga\n \nmodel\n \nperlu\n \nmemahami\n \nhubungan\n \nsemantik\n \nantar\n \nistilah\n \ndalam\n \nkonteks\n \nsosial\n \ndan\n \nbudaya\n \nlokal.\n \n \n \n \n \n \n \n \n \n \n ",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 21,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 22,
+    "text": "artikel\n \nberita\n \nbertema\n \n“demo”\n \ndi\n \nIndonesia.\n \nPendekatan\n \neksperimental\n \nini\n \ndipilih\n \nkarena\n \nmemungkinkan\n \npeneliti\n \nmelakukan\n \npengukuran\n \nkuantitatif\n \nterhadap\n \npeningkatan\n \ncoherence\n \nscore\n \nsebagai\n \nindikator\n \nkualitas\n \ntopik.\n \n4.2\n \nKerangka\n \nPenelitian\n \nSecara\n \numum,\n \npenelitian\n \nini\n \ndilaksanakan\n \nmelalui\n \nbeberapa\n \ntahapan\n \nutama\n \nyang\n \nditunjukkan\n \npada\n \nGambar\n \n4.1\n \nberikut:\n \n \nGambar\n \n2.\n \nAlur\n \nPenelitian\n \n \nTahapan\n \ntersebut\n \ndijel",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 22,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 23,
+    "text": "terkini.\n \n2.\n \nPra-pemrosesan\n \nTeks\n \n(Preprocessing)\n \n \nTahap\n \nini\n \nbertujuan\n \nuntuk\n \nmembersihkan\n \ndan\n \nmenyiapkan\n \ndata\n \nsebelum\n \ndilakukan\n \npemodelan.\n \nLangkah-langkah\n \nyang\n \ndilakukan\n \nmeliputi:\n \n○\n \nCase\n \nfolding\n:\n \nmengubah\n \nseluruh\n \nteks\n \nmenjadi\n \nhuruf\n \nkecil.\n \n○\n \nTokenization\n:\n \nmemecah\n \nteks\n \nmenjadi\n \nkata-kata\n \nindividual.\n \n○\n \nStopword\n \nremoval\n:\n \nmenghapus\n \nkata-kata\n \numum\n \nyang\n \ntidak\n \nmemiliki\n \nmakna\n \npenting\n \nseperti\n \n“yang”,\n \n“dan”,\n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 23,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 24,
+    "text": "teks\n \nyang\n \ntelah\n \ndibersihkan\n \ndiubah\n \nmenjadi\n \nmatriks\n \nword\n \nco-occurrence\n.\n \n○\n \nModel\n \nGloVe\n \ndilatih\n \nmenggunakan\n \nparameter\n \ndimensi\n \nvektor\n \n(misalnya\n \n100–300\n \ndimensi).\n \n○\n \nHasil\n \npelatihan\n \nberupa\n \nmatriks\n \nembedding\n \nyang\n \nmenyimpan\n \nrepresentasi\n \nsemantik\n \nsetiap\n \nkata.\n \n4.\n \nPemodelan\n \nTopik\n \ndengan\n \nLDA\n \ndan\n \nHybrid\n \nLDA–GloVe\n \n \nDua\n \nmodel\n \ndikembangkan\n \nuntuk\n \ntujuan\n \nperbandingan:\n \n○\n \nModel\n \nLDA\n \nbase:\n \nmenggunakan\n \ndistribusi\n \n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 24,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 25,
+    "text": "melalui\n \neksperimen\n \nbertahap.\n \n5.\n \nEvaluasi\n \nModel\n \n(Coherence\n \nScore)\n \nUntuk\n \nmengukur\n \nkualitas\n \ntopik\n \nyang\n \ndihasilkan,\n \ndigunakan\n \nmetrik\n \nCoherence\n \nScore\n \n(C_v).\n  \nNilai\n \nini\n \nmenunjukkan\n \nsejauh\n \nmana\n \nkata-kata\n \ndalam\n \nsatu\n \ntopik\n \nsaling\n \nberkaitan\n \nsecara\n \nsemantik.\n Semakin\n \ntinggi\n \nnilai\n \ncoherence\n,\n \nsemakin\n \nbaik\n \nkualitas\n \ntopik\n \nyang\n \ndihasilkan.\n \nHasil\n \ndari\n \nkedua\n \nmodel\n \ndibandingkan\n \nsecara\n \nkuantitatif.\n \n6.\n \nAnalisis\n \nHasil",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 25,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 26,
+    "text": "topik\n \nyang\n \ndihasilkan\n \nterhadap\n \nisu\n \n“demo”\n \ndi\n \nIndonesia.\n \n4.3\n \nArsitektur\n \nSistem\n \nArsitektur\n \nsistem\n \nhybrid\n \nyang\n \ndigunakan\n \ndalam\n \npenelitian\n \nini\n \nterdiri\n \ndari\n \nbeberapa\n \nkomponen\n \nutama:\n \n1.\n \nInput\n \nData\n \n(Korpus\n \nBerita\n \n“Demo”)\n \n \nDataset\n \nberisi\n \nartikel\n \nberita\n \nhasil\n \nscraping\n \ndan\n \npembersihan.\n \n2.\n \nText\n \nPreprocessing\n \n \nMelakukan\n \npembersihan,\n \ntokenisasi,\n \ndan\n \nnormalisasi\n \nteks.\n \n3.\n \nEmbedding\n \nLayer\n \n(GloVe)\n \n \nMenghasilk",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 26,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 27,
+    "text": "Module\n \n \nMenghitung\n \nCoherence\n \nScore\n \ndan\n \nmenampilkan\n \nperbandingan\n \nhasil\n \nantara\n \nmodel\n \nLDA\n \ndan\n \nHybrid\n \nLDA–GloVe.\n \n4.4\n \nPerangkat\n \ndan\n \nLingkungan\n \nPengujian\n \nEksperimen\n \ndilakukan\n \npada\n \nlingkungan\n \nsebagai\n \nberikut:\n \n●\n \nBahasa\n \nPemrograman:\n \nPython\n \n3.10\n \n●\n \nLibrary:\n \nGensim,\n \nPandas,\n \nNumpy,\n \nNLTK,\n \nMatplotlib\n \n●\n \nModel\n \nEmbedding:\n \nGloVe\n \npre-trained\n \n300-dimension\n \n(Wikipedia\n \n+\n \nGigaword)\n \n●\n \nMetode\n \nEvaluasi:\n \nCoherence\n \nScore\n \n(",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 27,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 28,
+    "text": "terhadap\n \nisu\n \n“demo”\n \ndi\n \nIndonesia.\n \n3.\n \nArsitektur\n \nhybrid\n \nterbukti\n \nefektif\n \ndalam\n \nmeningkatkan\n \nkualitas\n \npemodelan\n \ntopik\n \nuntuk\n \nteks\n \nberbahasa\n \nIndonesia.\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n DAFTAR\n \nPUSTAKA\n \n \nAbdillah,\n \nT.F.\n \ndan\n \nHasmawati,\n \nB.\n \n(2023)\n \nComparison\n \nof\n \nTF-IDF\n \nand\n \nGloVe\n \nfor\n \nSentiment\n \nAnalysis\n \nof\n \n2024\n \nPresidential\n \nCandidates\n.\n \n \n \nAhammad,\n \nT.\n \n(2024)\n \nIdentifying\n \nHidden\n \nPatterns\n \nof\n \nFake\n \nCOVID-19\n \n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 28,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 29,
+    "text": "and\n \nFuzzy\n \nMatch\n \nAlgorithm\n \nfor\n \nShort\n \nText\n \nClustering\n.\n \nJournal\n \nof\n \nBig\n \nData\n,\n \n11(3),\n \nhlm.\n \n202–215.\n \n \nAryani,\n \nD.,\n \nWulandhari,\n \nL.A.\n \ndan\n \nTatulus,\n \nR.L.\n \n(2024)\n \nTopic\n \nModeling\n \nof\n \nthe\n \n2024\n \nElection\n \nUsing\n \nBERTopic\n.\n \nInform\n \nJurnal\n,\n \n9(2),\n \nhlm.\n \n66–78.\n \n \n \nBlei,\n \nD.M.,\n \nNg,\n \nA.Y.\n \ndan\n \nJordan,\n \nM.I.\n \n(2003)\n \nLatent\n \nDirichlet\n \nAllocation\n.\n \nJournal\n \nof\n \nMachine\n \nLearning\n \nResearch\n,\n \n3,\n \nhlm.\n \n993–1022.\n \n \n \nGeeganage,",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 29,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 30,
+    "text": ",\n \nhlm.\n \n100–106.\n \n \n \nJurafsky,\n \nD.\n \ndan\n \nMartin,\n \nJ.H.\n \n(2023)\n \nSpeech\n \nand\n \nLanguage\n \nProcessing\n.\n \n3rd\n \nedn.\n \nPearson.\n \n \nKhadija,\n \nM.A.\n \ndan\n \nNurharjadmo,\n \nW.\n \n(2024)\n \nEnhancing\n \nIndonesian\n \nCustomer\n \nComplaint\n \nAnalysis:\n \nLDA\n \nTopic\n \nModelling\n \nwith\n \nBERT\n \nEmbeddings\n.\n \nSinergi\n,\n \n28(1),\n \nhlm.\n \n88–96.\n \n \n \nLubis,\n \nD.N.\n \n(2024)\n \nDynamics\n \nof\n \nAviation\n \nIssues\n \nin\n \nInstagram\n \nConversations:\n \nTopic\n \nModeling\n.\n \nJurnal\n \nSimbolika\n,\n \n10(1),\n \nh",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 30,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 31,
+    "text": "of\n \nICLR\n \nWorkshop\n,\n \nhlm.\n \n1–12.\n \n \n \nMimno,\n \nD.,\n \nWallach,\n \nH.M.,\n \nTalley,\n \nE.,\n \nLeenders,\n \nM.\n \ndan\n \nMcCallum,\n \nA.\n \n(2011)\n \nOptimizing\n \nSemantic\n \nCoherence\n \nin\n \nTopic\n \nModels\n.\n \nEMNLP\n \nProceedings\n,\n \nhlm.\n \n262–272.\n \n \n \nMorstatter,\n \nF.\n \ndan\n \nLiu,\n \nH.\n \n(2016)\n \nA\n \nNovel\n \nMeasure\n \nfor\n \nCoherence\n \nin\n \nStatistical\n \nTopic\n \nModels\n.\n \nKnowledge-Based\n \nSystems\n,\n \n104,\n \nhlm.\n \n15–24.\n \n \n \nPachlore,\n \nA.\n \ndan\n \nChakkarwar,\n \nV.\n \n(2023)\n \nOpinion\n \nMining\n \n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 31,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 32,
+    "text": "A\n \nPrompt-based\n \nTopic\n \nModelling\n \nFramework\n.\n \narXiv\n \npreprint\n \narXiv:2401.09321\n.\n \n \n \nRamadhan,\n \nN.G.\n \n(2021)\n \nIndonesian\n \nOnline\n \nNews\n \nTopics\n \nClassification\n \nusing\n \nWord2Vec\n \nand\n \nKNN\n.\n \nJurnal\n \nRESTI\n,\n \n7(1),\n \nhlm.\n \n44–52.\n \n \n \nRahmadzani,\n \nR.F.,\n \nSari,\n \nR.\n \ndan\n \nPrasetyo,\n \nY.\n \n(2020)\n \nDeep\n \nLearning\n \nfor\n \nSentiment\n \nAnalysis\n \nin\n \nIndonesian\n \nNovel\n \nReview\n.\n \nICST\n \nProceedings\n,\n \nhlm.\n \n70–76.\n \n \n \nSahria,\n \nY.\n \ndan\n \nFudholi,\n \nD.H.\n \n(2020)\n",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 32,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  },
+  {
+    "doc_id": "Draf Proposal.pdf",
+    "chunk_id": 33,
+    "text": "hlm.\n \n102129.\n \n \n \nWahyuni,\n \nW.,\n \nLestari,\n \nT.P.,\n \nApriliana,\n \nM.\n \ndan\n \nGumelta,\n \nR.\n \n(2025)\n \nImplementation\n \nof\n \nBERTopic\n \nfor\n \nTopic\n \nModeling\n \nAnalysis\n \nof\n \nthe\n \nFree\n \nNutritious\n \nMeal\n \nProgram\n \nBased\n \non\n \nYouTube\n \nComments\n.\n \nJAIC\n \nJournal\n,\n \n7(1),\n \nhlm.\n \n55–68.\n  \n \nAlsmadi,\n \nM.K.,\n \nSaleh,\n \nA.M.\n \ndan\n \nKhalid,\n \nM.\n \n(2024)\n \nHybrid\n \nTopic\n \nModelling\n \nfor\n \nShort\n \nText\n \nClustering\n.\n \nJournal\n \nof\n \nBig\n \nData\n,\n \n11(3),\n \nhlm.\n \n312–327.\n \n \n \nKapo",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "meta": {
+      "doc_id": "Draf Proposal.pdf",
+      "chunk_id": 33,
+      "category": "PDF",
+      "keywords": "yang, dalam, untuk"
+    },
+    "metadata": {
+      "filename": "Draf Proposal.pdf",
+      "file_size": 30384,
+      "creation_date": "2025-12-01T12:10:30.705799",
+      "page_count": 17,
+      "keywords": [
+        "yang",
+        "dalam",
+        "untuk",
+        "topik",
+        "model"
+      ],
+      "summary": "PROPOSAL\n \nSKRIPSI\n \nS1\n \n \n \n \n \nHYBRID\n \nTOPIC\n \nMODELLING\n \nDENGAN\n \nARSITEKTUR\n \nGLOVE\n \nDAN\n \nLDA\n \n(\nLatent\n \nDirichlet\n \nAllocation\n)\n \nUNTUK\n ...",
+      "document_type": "PDF"
+    }
+  }
+]
