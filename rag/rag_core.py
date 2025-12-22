@@ -1,6 +1,8 @@
 import os
 import json
 import faiss
+import time
+import random
 import base64
 from typing import List, Dict, Tuple, Any, Optional
 from dataclasses import dataclass, asdict
@@ -15,16 +17,15 @@ from groq import Groq
 from sentence_transformers import SentenceTransformer
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_community.docstore.in_memory import InMemoryDocstore
+from langchain_community. docstore.in_memory import InMemoryDocstore
 from langchain_core.embeddings import Embeddings
 from dotenv import load_dotenv
-import google.generativeai as genai
 
 # Import PDF libraries with fallback
 UNSTRUCTURED_AVAILABLE = False
 try:
     from unstructured.partition.pdf import partition_pdf
-    from unstructured.partition.docx import partition_docx
+    from unstructured.partition. docx import partition_docx
     UNSTRUCTURED_AVAILABLE = True
     print("✅ Unstructured library available")
 except ImportError:
@@ -62,32 +63,26 @@ def get_groq_client() -> Groq:
         raise RuntimeError("GROQ_API_KEY not set.  Provide it via env or a . env file.")
     return Groq(api_key=api_key)
 
-def get_gemini_client():
-    """Get Gemini API client"""
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY not set. Provide it via env or a .env file.")
-    genai.configure(api_key=api_key)
-    return genai.GenerativeModel('models/gemini-2.5-flash')
+# REMOVED: get_gemini_client() function - no longer needed
 
 # ========== Document Metadata Dataclass ==========
 @dataclass
 class DocumentMetadata:
     """Metadata untuk dokumen"""
     filename: str
-    file_size: int
+    file_size:  int
     creation_date: datetime
     page_count: int = 0
     keywords: Optional[List[str]] = None
     summary: str = ""
-    document_type: str = "general"
+    document_type:  str = "general"
     doc_id: str = ""
 
 
 @dataclass
 class DocChunk:
     """Document chunk with metadata"""
-    doc_id: str
+    doc_id:  str
     chunk_id: int
     text: str
     meta: Dict
@@ -100,7 +95,7 @@ class DocChunk:
 
 
 # ========== Simple Element Class for Fallback ==========
-class SimpleElement: 
+class SimpleElement:  
     """Simple element class for fallback PDF processing"""
     def __init__(self, text: str, page_num: Optional[int] = None, element_type: str = "text"):
         self.text = text
@@ -121,11 +116,8 @@ def extract_elements_from_pdf(file_path: str, output_path: str = "./content/") -
     """
     print(f"🔍 Extracting from PDF: {file_path}")
     
-    # Remove the duplicate SimpleElement class here! 
-    # It's already defined globally above
-    
     # Try Method 1: Unstructured (requires Poppler)
-    if UNSTRUCTURED_AVAILABLE:  # Add this check! 
+    if UNSTRUCTURED_AVAILABLE: 
         try:
             from unstructured.partition.pdf import partition_pdf
             
@@ -154,8 +146,8 @@ def extract_elements_from_pdf(file_path: str, output_path: str = "./content/") -
                     chunk_els = chunk.metadata.orig_elements
                     for el in chunk_els:
                         if "Image" in str(type(el)):
-                            if hasattr(el.metadata, 'image_base64') and el.metadata.image_base64:
-                                images_base64.append(el.metadata.image_base64)
+                            if hasattr(el. metadata, 'image_base64') and el.metadata.image_base64:
+                                images_base64.append(el.metadata. image_base64)
             
             print(f"✅ Extracted {len(chunks)} chunks with unstructured")
             return chunks, images_base64, page_map
@@ -167,7 +159,7 @@ def extract_elements_from_pdf(file_path: str, output_path: str = "./content/") -
         print("⚠️ Unstructured not available, using fallback methods")
     
     # Method 2: Fallback with pdfplumber (NO POPPLER NEEDED)
-    if PDFPLUMBER_AVAILABLE:  # Add this check too!
+    if PDFPLUMBER_AVAILABLE:
         try:
             import pdfplumber
             
@@ -178,7 +170,7 @@ def extract_elements_from_pdf(file_path: str, output_path: str = "./content/") -
             with pdfplumber.open(file_path) as pdf:
                 print(f"📖 Processing {len(pdf.pages)} pages with pdfplumber...")
                 
-                for page_num, page in enumerate(pdf. pages, start=1):
+                for page_num, page in enumerate(pdf.pages, start=1):
                     # Extract text
                     text = page.extract_text()
                     if text and text.strip():
@@ -188,9 +180,9 @@ def extract_elements_from_pdf(file_path: str, output_path: str = "./content/") -
                     
                     # Extract tables
                     tables = page.extract_tables()
-                    if tables:
+                    if tables: 
                         for table in tables:
-                            if table: 
+                            if table:  
                                 # Convert table to text format
                                 table_text = "\n".join([" | ".join([str(cell) if cell else "" for cell in row]) for row in table])
                                 table_html = f"<table>{table_text}</table>"
@@ -205,7 +197,7 @@ def extract_elements_from_pdf(file_path: str, output_path: str = "./content/") -
             print(f"⚠️ pdfplumber failed: {str(e)}")
     
     # Method 3: Last fallback with PyPDF2
-    if PYPDF2_AVAILABLE:  # Add this check too!
+    if PYPDF2_AVAILABLE: 
         try:
             from PyPDF2 import PdfReader
             
@@ -240,12 +232,10 @@ def extract_elements_from_docx(file_path: str) -> Tuple[List, List[str], Dict]:
     """
     print(f"🔍 Extracting from DOCX: {file_path}")
     
-    # Remove the duplicate SimpleElement class here too!
-    
     # Method 1: Unstructured
-    if UNSTRUCTURED_AVAILABLE:  # Add this check! 
+    if UNSTRUCTURED_AVAILABLE:
         try:
-            from unstructured.partition.docx import partition_docx
+            from unstructured.partition. docx import partition_docx
             
             print("📄 Trying unstructured library...")
             chunks = partition_docx(
@@ -272,7 +262,7 @@ def extract_elements_from_docx(file_path: str) -> Tuple[List, List[str], Dict]:
         print("⚠️ Unstructured not available, using fallback methods")
     
     # Method 2: Fallback with python-docx
-    if PYTHON_DOCX_AVAILABLE:   # Add this check! 
+    if PYTHON_DOCX_AVAILABLE: 
         try:
             from docx import Document
             
@@ -306,64 +296,100 @@ def extract_elements_from_docx(file_path: str) -> Tuple[List, List[str], Dict]:
     print(f"❌ All DOCX extraction methods failed for {file_path}")
     return [], [], {}
 
-def summarize_image_with_gemini(image_base64: str) -> str:
+def summarize_image_with_groq(image_base64: str, groq_client: Groq) -> str:
     """
-    Summarize image using Google Gemini Vision API (gemini-1.5-flash)
+    Summarize image using Groq's Llama 4 Scout Vision model
+    Model: meta-llama/llama-4-scout-17b-16e-instruct
     """
-    try: 
-        # Get Gemini client
-        model = get_gemini_client()
-        
-        # Decode base64 image
-        image_data = base64.b64decode(image_base64)
-        image = Image.open(BytesIO(image_data))
-        
-        prompt = """Describe this image in detail.
+    try:
+        prompt = """Describe this image in detail. 
 Focus on the key visual elements, text content, charts, diagrams, or any important information.
 Be specific and concise."""
         
-        # Generate content with image
-        response = model. generate_content([prompt, image])
+        # Create message with image
+        response = groq_client.chat. completions.create(
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": prompt
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{image_base64}"
+                            }
+                        }
+                    ]
+                }
+            ],
+            temperature=1,
+            max_tokens=500,
+            top_p=1,
+            stream=False,
+            stop=None
+        )
         
-        return response.text
-    except Exception as e: 
-        print(f"Error summarizing image with Gemini: {str(e)}")
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error summarizing image with Groq: {str(e)}")
         return "Image content could not be processed."
 
-def summarize_text_with_groq(text:  str, groq_client:  Groq) -> str:
-    """Summarize text using Groq"""
-    try:
-        prompt = f"""You are an assistant tasked with summarizing text content.
+def summarize_text_with_groq(text: str, groq_client: Groq, max_retries: int = 3) -> str:
+    """
+    Summarize text using Groq with auto-retry for connection errors.
+    """
+    # If text is too short, don't waste an API call
+    if len(text.strip()) < 50:
+        return text
+
+    for attempt in range(max_retries):
+        try:
+            prompt = f"""You are an assistant tasked with summarizing text content.
 Give a concise summary of the following text. 
 Respond only with the summary, no additional comment. 
 
 Text: {text}
 """
-        
-        response = groq_client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[{"role": "user", "content":  prompt}],
-            temperature=0.5,
-            max_tokens=300
-        )
-        
-        return response.choices[0].message. content
-    except Exception as e: 
-        print(f"Error summarizing text:  {str(e)}")
-        return text[: 500]  # Return first 500 chars as fallback
+            response = groq_client.chat.completions.create(
+                model="llama-3.1-8b-instant",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.5,
+                max_tokens=300
+            )
+            
+            return response.choices[0].message.content
 
+        except Exception as e:
+            error_msg = str(e)
+            print(f"⚠️ Attempt {attempt + 1}/{max_retries} failed: {error_msg}")
+            
+            # If it's a connection error or rate limit, wait and try again
+            if "Connection error" in error_msg or "429" in error_msg:
+                # Exponential backoff: Wait 2s, then 4s, then 8s...
+                sleep_time = (2 ** attempt) + random.uniform(0, 1)
+                time.sleep(sleep_time)
+            else:
+                # If it's a logic error (e.g., bad request), stop trying
+                break
+
+    print("❌ Failed to summarize after retries. Using fallback.")
+    return text[:500]  # Fallback
 
 def summarize_table_with_groq(table_html: str, groq_client:  Groq) -> str:
     """Summarize table using Groq"""
-    try: 
+    try:
         prompt = f"""You are an assistant tasked with summarizing tables.
-Give a concise summary of the following table.
-Respond only with the summary, no additional comment. 
+Give a concise summary of the following table. 
+Respond only with the summary, no additional comment.  
 
 Table: {table_html}
 """
         
-        response = groq_client.chat.completions.create(
+        response = groq_client.chat. completions.create(
             model="llama-3.1-8b-instant",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.5,
@@ -389,7 +415,7 @@ def chunk_text(
     if not text:
         return []
 
-    if strategy == "recursive": 
+    if strategy == "recursive":
         text_splitter = RecursiveCharacterTextSplitter(
             separators=["\n\n", "\n", ". ", " ", ""],
             chunk_size=max_tokens,
@@ -423,13 +449,13 @@ def chunk_text(
         for para in paragraphs:
             if len(current_chunk + para) < max_tokens:
                 current_chunk += para + "\n\n"
-            else: 
-                if current_chunk: 
-                    chunks.append(current_chunk.strip())
+            else:
+                if current_chunk:
+                    chunks.append(current_chunk. strip())
                 current_chunk = para + "\n\n"
 
-        if current_chunk: 
-            chunks.append(current_chunk.strip())
+        if current_chunk:
+            chunks.append(current_chunk. strip())
         return chunks
 
     else:  # simple
@@ -438,12 +464,12 @@ def chunk_text(
         current_chunk = []
         current_length = 0
 
-        for word in words:
+        for word in words: 
             word_length = len(word) + 1
             if current_length + word_length > max_tokens and current_chunk:
                 chunks. append(" ".join(current_chunk))
                 overlap_words = (
-                    current_chunk[-overlap_tokens // 10 :]
+                    current_chunk[-overlap_tokens // 10:]
                     if len(current_chunk) > overlap_tokens // 10
                     else []
                 )
@@ -462,7 +488,7 @@ def chunk_text(
 # ========== Document Metadata Helpers ==========
 def extract_keywords_simple(text: str, top_n: int = 10) -> List[str]:
     """Extract simple keywords from text based on word frequency"""
-    words = text.lower().split()
+    words = text. lower().split()
     stopwords = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were'}
     filtered_words = [w for w in words if w not in stopwords and len(w) > 3]
     
@@ -474,7 +500,7 @@ def generate_document_summary(text: str, max_length: int = 200) -> str:
     """Generate simple document summary from first sentences"""
     sentences = text.split('.  ')
     summary = ''
-    for sentence in sentences[: 3]: 
+    for sentence in sentences[: 3]:
         if len(summary + sentence) < max_length:
             summary += sentence + '. '
         else:
@@ -489,7 +515,7 @@ class SentenceTransformerEmbeddings(Embeddings):
     def __init__(self, model:  SentenceTransformer):
         self.model = model
     
-    def embed_documents(self, texts: List[str]) -> List[List[float]]: 
+    def embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Embed list of documents"""
         embeddings = self.model.encode(texts, convert_to_numpy=True)
         return embeddings.tolist()
@@ -536,7 +562,7 @@ def build_vector_store_with_metadata(
             "doc_id": doc. get("doc_id", "unknown"),
             "chunk_id": doc.get("chunk_id", 0),
             "category": doc.get("category", "unknown"),
-            "keywords": doc. get("keywords", ""),
+            "keywords": doc.get("keywords", ""),
             "content_type": doc.get("content_type", "text"),
         }
         metadatas.append(meta_dict)
@@ -583,7 +609,7 @@ def save_vector_store_with_metadata(
             "chunk_size": chunk.chunk_size,
             "chunk_overlap": chunk.chunk_overlap,
             "meta": chunk.meta,
-            "content_type":  chunk.content_type,
+            "content_type": chunk.content_type,
         }
         
         if chunk.metadata:
@@ -592,9 +618,9 @@ def save_vector_store_with_metadata(
                 "file_size": chunk.metadata.file_size,
                 "creation_date": chunk.metadata.creation_date. isoformat(),
                 "page_count": chunk.metadata.page_count,
-                "keywords":  chunk.metadata.keywords,
+                "keywords": chunk.metadata.keywords,
                 "summary": chunk.metadata.summary,
-                "document_type":  chunk.metadata.document_type,
+                "document_type": chunk.metadata. document_type,
             }
         
         chunks_data.append(chunk_data)
@@ -611,7 +637,7 @@ def load_vector_store_with_metadata(
     embed_model: SentenceTransformer
 ) -> Tuple[FAISS, List[Dict]]:
     """Load vector store beserta metadata"""
-    full_path = os.path.join(save_path, index_name)
+    full_path = os. path.join(save_path, index_name)
     
     if not os.path.exists(full_path):
         raise FileNotFoundError(f"Vector store not found at: {full_path}")
@@ -655,7 +681,7 @@ def rerank_results(
         original_score = result["score"]
         
         doc_words = set(text.lower().split())
-        keyword_overlap = len(query_words. intersection(doc_words)) / max(1, len(query_words))
+        keyword_overlap = len(query_words.intersection(doc_words)) / max(1, len(query_words))
         keyword_score = keyword_overlap
         
         if rerank_method == "hybrid":
@@ -678,7 +704,7 @@ def rerank_results(
 
 
 def search_vector_store_with_reranking(
-    vector_store: FAISS,
+    vector_store:  FAISS,
     query: str,
     embed_model: SentenceTransformer,
     k: int = 5,
@@ -702,8 +728,7 @@ def search_vector_store_with_reranking(
     
     return reranked_results[: k]
 
-# Add this function to rag_core.py (add it after the answer_with_rag function)
-def detect_language(text:  str) -> str:
+def detect_language(text: str) -> str:
     """
     Simple language detection based on character patterns
     Returns:  'indonesian' or 'english'
@@ -726,24 +751,22 @@ def detect_language(text:  str) -> str:
     # Return language with higher count, default to indonesian
     if english_count > indonesian_count: 
         return 'english'
-    else:
+    else: 
         return 'indonesian'
 
 
-# Update the create_enhanced_context function
 def create_enhanced_context(chunks: List[DocChunk]) -> str:
     """Create enhanced context from document chunks with page references"""
     parts = []
     for ch in chunks:
         content_type = ch.meta.get('content_type', 'text')
         page_info = f", Halaman {ch.page_number}" if ch.page_number else ""
-        header = f"[{ch.doc_id}{page_info} | {ch.meta.get('category', 'unknown')} | Tipe: {content_type}]\n"
+        header = f"[{ch. doc_id}{page_info} | {ch.meta.get('category', 'unknown')} | Tipe: {content_type}]\n"
         parts.append(header + ch.text. strip())
     return "\n\n---\n\n".join(parts)
 
 
-# Update answer_with_rag function (replace the existing one)
-def answer_with_rag(query: str, retrieved: List[DocChunk], chat_model: str) -> str:
+def answer_with_rag(query: str, retrieved:  List[DocChunk], chat_model: str) -> str:
     """Generate an answer using the retrieved document snippets and GROQ chat model with auto language detection"""
     client = get_groq_client()
     
@@ -751,26 +774,26 @@ def answer_with_rag(query: str, retrieved: List[DocChunk], chat_model: str) -> s
     language = detect_language(query)
     
     # System prompt based on detected language
-    if language == "indonesian": 
+    if language == "indonesian":
         system_prompt = """Anda adalah asisten AI untuk analisis dokumen. 
 Tugas Anda adalah menjawab pertanyaan pengguna berdasarkan kutipan dokumen yang disediakan.
-Kutipan dapat mencakup konten teks, ringkasan tabel, dan deskripsi gambar. 
+Kutipan dapat mencakup konten teks, ringkasan tabel, dan deskripsi gambar.  
 Jawab HANYA berdasarkan konteks yang diberikan.  Berikan jawaban yang ringkas dan jangan mengarang fakta.
 Jika jawabannya tidak ada dalam konteks, katakan "Informasi tidak ditemukan dalam dokumen."
 
-PENTING: Setelah menjawab, SELALU cantumkan referensi dengan format: 
+PENTING: Setelah menjawab, SELALU cantumkan referensi dengan format:  
 
 Referensi:
 - [nama_file], halaman [nomor_halaman]
 - [nama_file], halaman [nomor_halaman]
 
-Jika nomor halaman tidak tersedia, cukup tulis: 
+Jika nomor halaman tidak tersedia, cukup tulis:  
 - [nama_file]"""
     else:
         system_prompt = """You are an AI assistant for document analysis. 
-Your job is to answer the user's question strictly based on the provided document snippets.
-The snippets may include text content, table summaries, and image descriptions.
-Answer only based on the provided context. Be concise and do not invent facts. 
+Your job is to answer the user's question strictly based on the provided document snippets. 
+The snippets may include text content, table summaries, and image descriptions. 
+Answer only based on the provided context. Be concise and do not invent facts.  
 If the answer does not exist in the context, say "Not found in the document."
 
 IMPORTANT: After answering, ALWAYS include references in this format:
@@ -789,12 +812,12 @@ If page number is not available, just write:
     if language == "indonesian":
         user_prompt = f"""Pertanyaan: {query}
 
-Konteks dokumen yang relevan: 
+Konteks dokumen yang relevan:  
 {context}
 
-Tolong jawab pertanyaan berdasarkan konteks di atas.  Jika memungkinkan, sebutkan dokumen mana yang menjadi rujukan jawaban Anda."""
+Tolong jawab pertanyaan berdasarkan konteks di atas. Jika memungkinkan, sebutkan dokumen mana yang menjadi rujukan jawaban Anda."""
     else:
-        user_prompt = f"""Question:  {query}
+        user_prompt = f"""Question: {query}
 
 Relevant document snippets:
 {context}
@@ -802,17 +825,17 @@ Relevant document snippets:
 Please answer the question based on the context above. If possible, mention which documents were used as references."""
     
     try:
-        resp = client.chat.completions.create(
+        resp = client.chat.completions. create(
             model=chat_model,
             messages=[
-                {"role":  "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content":  user_prompt},
             ],
             temperature=0.2,
         )
-        return resp.choices[0].message.content
+        return resp.choices[0].message. content
     except Exception as e: 
         if language == "indonesian":
             return f"Kesalahan saat menghasilkan jawaban: {str(e)}"
         else:
-            return f"Error generating answer:  {str(e)}"
+            return f"Error generating answer: {str(e)}"

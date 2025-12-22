@@ -10,12 +10,12 @@ from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from rag.rag_core import (
+from rag. rag_core import (
     extract_elements_from_pdf,
     extract_elements_from_docx,
     summarize_text_with_groq,
     summarize_table_with_groq,
-    summarize_image_with_gemini,
+    summarize_image_with_groq,
     extract_keywords_simple,
     generate_document_summary,
     build_vector_store_with_metadata,
@@ -28,6 +28,12 @@ from rag.rag_core import (
     get_groq_client,
 )
 
+from rag.history_chat import (
+    process_user_query,
+    save_assistant_answer,
+    load_chat_history,
+)
+
 load_dotenv()
 
 # ========== Helper Function ==========
@@ -37,13 +43,13 @@ def extract_references(chunks: List[DocChunk]) -> List[Dict[str, Any]]:
     
     for chunk in chunks:
         doc_id = chunk.doc_id
-        page_num = chunk. page_number if hasattr(chunk, 'page_number') else None
+        page_num = chunk.page_number if hasattr(chunk, 'page_number') else None
         
-        if doc_id not in references: 
+        if doc_id not in references:
             references[doc_id] = set()
         
-        if page_num:
-            references[doc_id].add(page_num)
+        if page_num: 
+            references[doc_id]. add(page_num)
     
     # Format references
     formatted_refs = []
@@ -51,12 +57,12 @@ def extract_references(chunks: List[DocChunk]) -> List[Dict[str, Any]]:
         if pages:
             sorted_pages = sorted(list(pages))
             formatted_refs.append({
-                "document":  doc_id,
+                "document": doc_id,
                 "pages": sorted_pages,
-                "display": f"{doc_id}, halaman {', '.join(map(str, sorted_pages))}"
+                "display":  f"{doc_id}, halaman {', '.join(map(str, sorted_pages))}"
             })
         else:
-            formatted_refs.append({
+            formatted_refs. append({
                 "document": doc_id,
                 "pages": [],
                 "display": doc_id
@@ -65,78 +71,423 @@ def extract_references(chunks: List[DocChunk]) -> List[Dict[str, Any]]:
     return formatted_refs
 
 # ========== Page Configuration ==========
-st. set_page_config(
-    page_title="RAG Chatbot - Multimodal",
+st.set_page_config(
+    page_title="RAG Chatbot",
     page_icon="📚",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
+
 # ========== Custom CSS Styling ==========
 def add_custom_css():
     st.markdown("""
         <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Dark theme colors */
         .main {
-            background-color: #0d1117;
-            color: #e6edf3;
+            background-color: #212121;
+            color: #ececec;
         }
-        body {
-            background-color: #0d1117;
-        }
+        
+        /* Hide default elements */
         [data-testid="stSidebar"] {
-            background-color: #161b22;
+            display:  none;
         }
-        . stButton>button {
-            background-color: #238636;
-            color: #ffffff;
-            border-radius: 8px;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            font-weight: 600;
+        
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+        
+        /* Top navigation bar */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #212121;
+            border-bottom: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
         }
-        .stButton>button:hover {
-            background-color: #2ea043;
-            color: white;
+        
+        /* Model selector (left side) */
+        .model-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #2f2f2f;
+            padding: 8px 16px;
+            border-radius:  8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
-        .stDataFrame {
-            border-radius: 10px ! important;
-            overflow: hidden !important;
+        
+        .model-selector:hover {
+            background-color: #3f3f3f;
         }
-        .answer-box {
-            background-color: #161b22;
+        
+        .model-name {
+            color: #ececec;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        /* Chat container */
+        .chat-container {
+            margin-top: 80px;
+            margin-bottom: 150px;
             padding: 20px;
-            border-radius:  12px;
-            border: 1px solid #30363d;
-            margin-top: 10px;
+            max-width: 900px;
+            margin-left:  auto;
+            margin-right:  auto;
+        }
+        
+        /* Welcome message */
+        .welcome-message {
+            text-align: center;
+            margin-top: 150px;
+            margin-bottom: 50px;
+        }
+        
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #ececec;
+            margin-bottom:  30px;
+        }
+        
+        /* Message bubbles */
+        .user-message {
+            background-color: #2f2f2f;
+            color: #ececec;
+            padding: 16px 20px;
+            border-radius: 20px;
+            margin:  12px 0;
+            max-width: 75%;
+            margin-left: auto;
+            word-wrap: break-word;
             line-height: 1.6;
         }
-        h1, h2, h3 {
-            color: #58a6ff;
-            font-weight: 700;
+        
+        . assistant-message {
+            background-color: #2f2f2f;
+            color: #ececec;
+            padding: 16px 20px;
+            border-radius:  20px;
+            margin:  12px 0;
+            max-width: 75%;
+            word-wrap: break-word;
+            line-height: 1.6;
         }
-        . score-badge {
-            background-color: #238636;
-            color: white;
-            padding: 2px 8px;
-            border-radius:  12px;
-            font-size:  0.85em;
-            font-weight: 600;
+        
+        /* Input container */
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #212121;
+            padding: 20px;
+            z-index: 999;
+        }
+        
+        . input-wrapper {
+            max-width: 900px;
+            margin:  0 auto;
+            position: relative;
+        }
+        
+        /* Plus button */
+        .plus-button {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background:  transparent;
+            border: none;
+            color: #ececec;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        . plus-button:hover {
+            background-color: #3f3f3f;
+        }
+        
+        /* Popup menu */
+        .popup-menu {
+            position: absolute;
+            bottom: 60px;
+            left: 12px;
+            background-color: #2f2f2f;
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 250px;
+            box-shadow:  0 4px 20px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+        
+        .popup-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #ececec;
+        }
+        
+        .popup-menu-item:hover {
+            background-color: #3f3f3f;
+        }
+        
+        .popup-menu-icon {
+            font-size: 18px;
+        }
+        
+        /* Text input styling */
+        .stTextInput > div > div > input {
+            background-color: #2f2f2f ! important;
+            color: #ececec !important;
+            border: 1px solid #444 !important;
+            border-radius: 24px !important;
+            padding:  14px 100px 14px 50px !important;
+            font-size: 15px !important;
+        }
+        
+        .stTextInput > div > div > input: focus {
+            border-color: #666 !important;
+            box-shadow: none !important;
+        }
+        
+        /* Send button */
+        .send-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform:  translateY(-50%);
+            background-color: #ececec;
+            border: none;
+            color: #212121;
+            width: 36px;
+            height: 36px;
+            border-radius:  50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background-color 0.2s;
+        }
+        
+        .send-button:hover {
+            background-color: #d0d0d0;
+        }
+        
+        . send-button:disabled {
+            background-color: #3f3f3f;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        /* Modal overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom:  0;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 9998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #2f2f2f;
+            padding: 30px;
+            border-radius:  16px;
+            max-width:  600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y:  auto;
+            border: 1px solid #444;
+            z-index: 9999;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight:  600;
+            color: #ececec;
+        }
+        
+        .close-button {
+            background: transparent;
+            border: none;
+            color: #ececec;
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .close-button:hover {
+            background-color: #3f3f3f;
+        }
+        
+        /* Button styling */
+        .stButton > button {
+            background-color: #ececec ! important;
+            color: #212121 !important;
+            border-radius: 8px !important;
+            border: none !important;
+            padding: 10px 20px !important;
+            font-weight: 600 !important;
+            transition: background-color 0.2s ! important;
+        }
+        
+        .stButton > button:hover {
+            background-color: #d0d0d0 ! important;
+        }
+        
+        /* File uploader */
+        [data-testid="stFileUploader"] {
+            background-color: #3f3f3f;
+            border: 2px dashed #666;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        /* Selectbox */
+        .stSelectbox > div > div {
+            background-color: #3f3f3f ! important;
+            color: #ececec !important;
+            border: 1px solid #666 !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Slider */
+        .stSlider > div > div > div {
+            background-color: #3f3f3f !important;
+        }
+        
+        /* Checkbox */
+        .stCheckbox {
+            color: #ececec !important;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #212121;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Success/Warning/Error messages */
+        .stSuccess, .stWarning, .stError {
+            background-color: #3f3f3f ! important;
+            color: #ececec !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Reference box */
+        .reference-box {
+            background-color: #3f3f3f;
+            padding: 12px;
+            border-radius:  8px;
+            border-left: 3px solid #666;
+            margin-top: 12px;
+            font-size: 0.9em;
+            color: #b0b0b0;
         }
         </style>
     """, unsafe_allow_html=True)
 
 add_custom_css()
 
-# ========== Title ==========
-st.title("📚 RAG Chatbot - Multimodal")
-
 # ========== Session State Initialization ==========
-if "vector_store" not in st. session_state:
-    st. session_state.vector_store = None
+if "vector_store" not in st.session_state:
+    st.session_state.vector_store = None
 if "doc_chunks" not in st.session_state:
-    st.session_state. doc_chunks = []
+    st.session_state.doc_chunks = []
 if "doc_metadata" not in st.session_state:
-    st.session_state. doc_metadata = None
+    st.session_state.doc_metadata = None
 if "total_chunks" not in st.session_state:
     st.session_state.total_chunks = 0
+if "session_id" not in st.session_state:
+    import uuid
+    st.session_state.session_id = str(uuid.uuid4())
+if "references" not in st.session_state:
+    st.session_state.references = []
+if "show_settings" not in st.session_state:
+    st.session_state.show_settings = False
+if "show_upload_menu" not in st.session_state:
+    st.session_state.show_upload_menu = False
+if "show_model_selector" not in st.session_state:
+    st.session_state.show_model_selector = False
+if "chat_messages" not in st.session_state:
+    st.session_state.chat_messages = []
+if "chat_model" not in st.session_state:
+    st.session_state.chat_model = "llama-3.1-8b-instant"
+if "enable_reranking" not in st.session_state:
+    st.session_state.enable_reranking = True
+if "rerank_method" not in st.session_state:
+    st.session_state.rerank_method = "hybrid"
+if "rerank_top_k" not in st.session_state:
+    st.session_state.rerank_top_k = 20
+if "top_k" not in st.session_state:
+    st.session_state.top_k = 5
+if "chunking_strategy" not in st. session_state:
+    st. session_state.chunking_strategy = "recursive"
+if "chunk_size" not in st.session_state:
+    st.session_state.chunk_size = 1000
+if "chunk_overlap" not in st.session_state:
+    st.session_state.chunk_overlap = 100
 
 # ========== Load Embedding Model (Cached) ==========
 @st.cache_resource
@@ -147,85 +498,7 @@ def load_embedding_model():
 embed_model = load_embedding_model()
 embed_model_name = 'sentence-transformers/all-mpnet-base-v2'
 
-# ========== Sidebar Configuration ==========
-with st.sidebar:
-    st. header("📤 Upload Documents")
-    
-    uploaded_files = st.file_uploader(
-        "Upload PDF or DOCX files", 
-        type=["pdf", "docx"], 
-        accept_multiple_files=True
-    )
-    
-    col_build, col_reset = st.columns([2, 1])
-    with col_build:
-        build_button = st.button("🔨 Build Index", use_container_width=True)
-    with col_reset:
-        reset_button = st.button("🗑️", help="Clear index")
-    
-    st.markdown("---")
-    st.header("⚙️ Chunking Settings")
-    
-    chunking_strategy = st.selectbox(
-        "Strategy",
-        options=["recursive", "semantic", "paragraph", "simple"],
-        index=0,
-        help="Choose chunking strategy"
-    )
-    
-    chunk_size = st.slider("Chunk Size (chars)", 500, 2000, 1000, 100)
-    chunk_overlap = st.slider("Chunk Overlap (chars)", 50, 500, 100, 50)
-    
-    st.markdown("---")
-    st.header("🎯 Retrieval Settings")
-    
-    enable_reranking = st.checkbox("Enable Reranking", value=True)
-    
-    if enable_reranking: 
-        rerank_method = st.selectbox(
-            "Reranking Method",
-            options=["hybrid", "keyword", "semantic"],
-            index=0,
-            help="Hybrid:  70% semantic + 30% keyword"
-        )
-        rerank_top_k = st.slider("Initial Retrieval (before rerank)", 10, 50, 20, 5)
-    else:
-        rerank_method = "semantic"
-        rerank_top_k = 5
-    
-    top_k = st.slider("Final Results", 1, 10, 5)
-    
-    st.markdown("---")
-    st.header("🤖 Model Settings")
-    
-    chat_model_options = [
-        "llama-3.1-8b-instant",
-        "mixtral-8x7b-32768"
-    ]
-    
-    chat_model = st.selectbox(
-        "GROQ Chat Model",
-        options=chat_model_options,
-        index=0,
-    )
-    
-    st.markdown("---")
-    st.info(f"🔧 **Embedding Model**\n\n{embed_model_name}")
-    
-    if st.session_state.vector_store is not None:
-        st.success(f"✅ Index Loaded\n\n{st.session_state.total_chunks} chunks indexed")
-    else:
-        st.warning("⚠️ No index loaded")
-
-# ========== Handle Reset Button ==========
-if reset_button:
-    st.session_state.vector_store = None
-    st.session_state. doc_chunks = []
-    st.session_state.doc_metadata = None
-    st.session_state.total_chunks = 0
-    st.rerun()
-
-# ========== Build Index from Uploaded Files ==========
+# ========== Build Index Function ==========
 def build_multimodal_index_from_files(
     files: List[io.BytesIO],
     embed_model: SentenceTransformer,
@@ -240,15 +513,15 @@ def build_multimodal_index_from_files(
     
     for f in files:
         file_name = getattr(f, "name", "uploaded")
-        file_ext = file_name.split('.')[-1].lower()
+        file_ext = file_name.split('.')[-1]. lower()
         
         # Save file temporarily
         temp_path = f"./temp_{file_name}"
         with open(temp_path, "wb") as temp_file:
             temp_file.write(f.read())
         
-        try: 
-            # Extract elements based on file type (now with page tracking)
+        try:
+            # Extract elements based on file type
             if file_ext == "pdf":
                 elements, images_base64, page_map = extract_elements_from_pdf(temp_path)
             elif file_ext == "docx": 
@@ -258,7 +531,7 @@ def build_multimodal_index_from_files(
                 continue
             
             if not elements:
-                st. warning(f"⚠️ No content extracted from {file_name}")
+                st.warning(f"⚠️ No content extracted from {file_name}")
                 continue
             
             # Process text and tables
@@ -268,8 +541,8 @@ def build_multimodal_index_from_files(
             for idx, element in enumerate(elements):
                 element_type = str(type(element))
                 if "Table" in element_type: 
-                    tables.append((element, page_map.get(idx)))
-                elif "CompositeElement" in element_type:
+                    tables.append((element, page_map. get(idx)))
+                elif "CompositeElement" in element_type: 
                     texts.append((element, page_map.get(idx)))
             
             # Create metadata
@@ -280,7 +553,7 @@ def build_multimodal_index_from_files(
             doc_metadata = DocumentMetadata(
                 filename=file_name,
                 file_size=len(all_text),
-                creation_date=datetime. now(),
+                creation_date=datetime.now(),
                 page_count=len(elements),
                 keywords=keywords,
                 summary=summary,
@@ -293,7 +566,7 @@ def build_multimodal_index_from_files(
                 "keywords": ", ".join(keywords),
                 "summary": summary,
                 "char_count": len(all_text),
-                "page_count": len(elements),
+                "page_count":  len(elements),
                 "content_types": f"Text:  {len(texts)}, Tables: {len(tables)}, Images: {len(images_base64)}"
             })
             
@@ -315,14 +588,14 @@ def build_multimodal_index_from_files(
                         "chunk_overlap": chunk_overlap,
                         "content_type": "text",
                         "metadata": doc_metadata,
-                        "page_number":  page_num
+                        "page_number": page_num
                     })
                     chunk_id += 1
             
             # Process tables with page numbers
             for table_elem, page_num in tables: 
                 if hasattr(table_elem. metadata, 'text_as_html'):
-                    table_html = table_elem.metadata. text_as_html
+                    table_html = table_elem.metadata.text_as_html
                     table_summary = summarize_table_with_groq(table_html, groq_client)
                     
                     documents.append({
@@ -330,18 +603,18 @@ def build_multimodal_index_from_files(
                         "doc_id": file_name,
                         "chunk_id": chunk_id,
                         "category": "TABLE",
-                        "keywords": ", ".join(keywords[: 3]),
+                        "keywords": ", ".join(keywords[:3]),
                         "chunk_size": chunk_size,
-                        "chunk_overlap": chunk_overlap,
+                        "chunk_overlap":  chunk_overlap,
                         "content_type": "table",
                         "metadata": doc_metadata,
                         "page_number": page_num
                     })
                     chunk_id += 1
             
-            # Process images (images typically don't have page numbers in this extraction)
+            # Process images
             for img_idx, img_base64 in enumerate(images_base64):
-                img_description = summarize_image_with_gemini(img_base64)
+                img_description = summarize_image_with_groq(img_base64, groq_client)
                 
                 documents.append({
                     "text": img_description,
@@ -357,11 +630,11 @@ def build_multimodal_index_from_files(
                 })
                 chunk_id += 1
         
-        except Exception as e: 
-            st.warning(f"⚠️ Failed to process {file_name}:  {str(e)}")
+        except Exception as e:
+            st. warning(f"⚠️ Failed to process {file_name}: {str(e)}")
         finally:
             # Clean up temp file
-            if os.path. exists(temp_path):
+            if os.path.exists(temp_path):
                 os.remove(temp_path)
     
     if not documents:
@@ -376,102 +649,248 @@ def build_multimodal_index_from_files(
     
     return vector_store, doc_chunks, doc_metadata_list
 
-# ========== Build Button Logic ==========
-if build_button: 
-    if not uploaded_files:
-        st.warning("⚠️ Please upload at least one file first.")
-    else:
-        with st.spinner("🔄 Building multimodal vector store..."):
-            try:
-                vector_store, doc_chunks, doc_metadata = build_multimodal_index_from_files(
-                    uploaded_files,
-                    embed_model,
-                    chunking_strategy,
-                    chunk_size,
-                    chunk_overlap
-                )
-                
-                if vector_store is not None:
-                    st.session_state.vector_store = vector_store
-                    st.session_state.doc_chunks = doc_chunks
-                    st.session_state.doc_metadata = doc_metadata
-                    st.session_state.total_chunks = len(doc_chunks)
-                    
-                    save_path = "./Memory"
-                    save_vector_store_with_metadata(
-                        vector_store, 
-                        doc_chunks, 
-                        save_path, 
-                        "rag_multimodal_index"
-                    )
-                    
-                    st.success(f"✅ Multimodal vector store built!  ({len(doc_chunks)} chunks)")
-                    
-                    with st.expander("📋 Document Summary", expanded=True):
-                        summary_df = pd.DataFrame(doc_metadata)
-                        st.dataframe(summary_df, use_container_width=True)
-                else:
-                    st.error("❌ No valid content found in uploaded files.")
-            
-            except Exception as e:
-                st.error(f"❌ Error building index: {str(e)}")
-                st.exception(e)
-
 # ========== Auto-load Existing Vector Store ==========
 if st.session_state.vector_store is None:
     try:
         if os.path.exists("./Memory/rag_multimodal_index"):
-            with st.spinner("📂 Loading existing vector store..."):
-                vector_store, metadata = load_vector_store_with_metadata(
-                    "./Memory", 
-                    "rag_multimodal_index", 
-                    embed_model
-                )
-                st.session_state.vector_store = vector_store
-                st. session_state.total_chunks = len(metadata)
-                st.info(f"✅ Existing vector store loaded ({len(metadata)} chunks)")
-    except Exception as e:
+            vector_store, metadata = load_vector_store_with_metadata(
+                "./Memory", 
+                "rag_multimodal_index", 
+                embed_model
+            )
+            st.session_state.vector_store = vector_store
+            st.session_state.total_chunks = len(metadata)
+    except Exception: 
         pass
 
-# ========== Chat Interface ==========
+# Load chat history from database
+if not st.session_state.chat_messages:
+    history = load_chat_history(st.session_state.session_id)
+    st.session_state.chat_messages = history
+
+# ========== Top Navigation Bar ==========
+col_left, col_right = st. columns([1, 5])
+
+with col_left:
+    if st.button(f"🤖 {st.session_state.chat_model}", key="model_btn", help="Change model"):
+        st.session_state.show_model_selector = not st.session_state.show_model_selector
+
+# ========== Model Selector Modal ==========
+if st.session_state.show_model_selector:
+    @st.dialog("🤖 Model & Settings")
+    def show_model_settings():
+        # Model selection
+        chat_model = st.selectbox(
+            "Chat Model",
+            options=["llama-3.1-8b-instant", "mixtral-8x7b-32768"],
+            index=0 if st.session_state.chat_model == "llama-3.1-8b-instant" else 1,
+            key="model_select"
+        )
+        st.session_state.chat_model = chat_model
+        
+        st.markdown("---")
+        
+        # Retrieval settings
+        st.markdown("#### 🎯 Retrieval Settings")
+        st.session_state.enable_reranking = st.checkbox(
+            "Enable Reranking", 
+            value=st.session_state.enable_reranking
+        )
+        
+        if st.session_state.enable_reranking:
+            st. session_state.rerank_method = st.selectbox(
+                "Reranking Method",
+                options=["hybrid", "keyword", "semantic"],
+                index=["hybrid", "keyword", "semantic"]. index(st.session_state. rerank_method)
+            )
+            st.session_state.rerank_top_k = st.slider(
+                "Initial Retrieval", 
+                10, 50, st.session_state.rerank_top_k, 5
+            )
+        
+        st.session_state.top_k = st.slider(
+            "Final Results", 
+            1, 10, st.session_state.top_k
+        )
+        
+        st. markdown("---")
+        
+        # Chunking settings
+        st.markdown("#### ⚙️ Chunking Settings")
+        st.session_state.chunking_strategy = st. selectbox(
+            "Strategy",
+            options=["recursive", "semantic", "paragraph", "simple"],
+            index=["recursive", "semantic", "paragraph", "simple"].index(st.session_state.chunking_strategy)
+        )
+        st.session_state.chunk_size = st.slider(
+            "Chunk Size (chars)", 
+            500, 2000, st.session_state.chunk_size, 100
+        )
+        st.session_state.chunk_overlap = st.slider(
+            "Chunk Overlap (chars)", 
+            50, 500, st.session_state.chunk_overlap, 50
+        )
+        
+        st.markdown("---")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("✓ Apply", use_container_width=True):
+                st.session_state.show_model_selector = False
+                st. rerun()
+        with col2:
+            if st.button("🗑️ Clear Chat", use_container_width=True):
+                st.session_state.chat_messages = []
+                st.session_state.vector_store = None
+                st. session_state.doc_chunks = []
+                st.session_state. total_chunks = 0
+                st.session_state.show_model_selector = False
+                st. rerun()
+    
+    show_model_settings()
+
+# ========== Upload Settings Modal ==========
+if st.session_state.show_settings:
+    @st.dialog("📤 Upload Documents")
+    def show_upload_dialog():
+        uploaded_files = st.file_uploader(
+            "Select PDF or DOCX files",
+            type=["pdf", "docx"],
+            accept_multiple_files=True,
+            key="file_uploader"
+        )
+        
+        if uploaded_files: 
+            st.info(f"✓ {len(uploaded_files)} file(s) selected")
+            
+            col_build, col_cancel = st.columns(2)
+            with col_build:
+                if st.button("🔨 Build Index", use_container_width=True):
+                    with st.spinner("🔄 Building vector store..."):
+                        try:
+                            vector_store, doc_chunks, doc_metadata = build_multimodal_index_from_files(
+                                uploaded_files,
+                                embed_model,
+                                st.session_state.chunking_strategy,
+                                st.session_state.chunk_size,
+                                st.session_state.chunk_overlap
+                            )
+                            
+                            if vector_store is not None:
+                                st. session_state.vector_store = vector_store
+                                st. session_state.doc_chunks = doc_chunks
+                                st. session_state. doc_metadata = doc_metadata
+                                st.session_state.total_chunks = len(doc_chunks)
+                                
+                                save_path = "./Memory"
+                                save_vector_store_with_metadata(
+                                    vector_store,
+                                    doc_chunks,
+                                    save_path,
+                                    "rag_multimodal_index"
+                                )
+                                
+                                st.success(f"✅ Index built!  ({len(doc_chunks)} chunks)")
+                                st.session_state.show_settings = False
+                                st.rerun()
+                            else:
+                                st. error("❌ No valid content found")
+                        except Exception as e: 
+                            st.error(f"❌ Error:  {str(e)}")
+            
+            with col_cancel: 
+                if st.button("Cancel", use_container_width=True):
+                    st.session_state.show_settings = False
+                    st.rerun()
+        else:
+            if st.button("Close", use_container_width=True):
+                st.session_state.show_settings = False
+                st.rerun()
+    
+    show_upload_dialog()
+
+# ========== Chat Display ==========
+if not st.session_state.chat_messages:
+    # Welcome screen
+    st.markdown("""
+        <div class="welcome-message">
+            <div class="welcome-title">Apa yang bisa saya bantu? </div>
+        </div>
+    """, unsafe_allow_html=True)
+else:
+    # Chat messages
+    st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+    for message in st.session_state.chat_messages:
+        if message["role"] == "user": 
+            st.markdown(f'<div class="user-message">{message["content"]}</div>', unsafe_allow_html=True)
+        else:
+            st. markdown(f'<div class="assistant-message">{message["content"]}</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# ========== Input Area with Plus Button ==========
 st.markdown("---")
-st.header("💬 Ask Questions")
 
-query = st.text_input(
-    "Enter your question",
-    placeholder="e.g., What is shown in the images?"
-)
+# Create columns for input layout
+col_plus = st.columns([1, 20, 1])
 
-ask_button = st.button("🔍 Ask", use_container_width=False)
+# Plus button column
+with col_plus[0]: 
+    if st.button("➕", key="plus_btn", help="Upload files"):
+        st.session_state.show_settings = True
+        st.rerun()
+
+# Input field
+with col_plus[1]: 
+    query = st.text_input(
+        "Message",
+        placeholder="Tanyakan apa saja...",
+        label_visibility="collapsed",
+        key="query_input"
+    )
+
+# Send button
+with col_plus[2]:
+    ask_button = st.button("↑", key="send_btn", help="Send", disabled=not query)
 
 # ========== Query Processing ==========
-answer_text = None
-retrieved_results = []
-
 if ask_button and query:
     if st.session_state.vector_store is None:
-        st.warning("⚠️ Please build the index first / Silakan buat indeks terlebih dahulu dari sidebar.")
+        st.warning("⚠️ Please upload and build index first via + button")
     else:
-        with st.spinner("🔎 Searching multimodal content and generating answer..."):
+        # Add user message to chat
+        st.session_state.chat_messages.append({"role": "user", "content": query})
+        
+        with st.spinner("💭 Thinking..."):
             try:
-                if enable_reranking:
+                session_id = st.session_state.session_id
+                
+                # Process query with history
+                standalone_query = process_user_query(
+                    session_id=session_id,
+                    user_query=query
+                )
+                
+                # Search vector store
+                if st.session_state.enable_reranking:
                     results = search_vector_store_with_reranking(
-                        st.session_state.vector_store,
-                        query=query,
+                        st. session_state.vector_store,
+                        query=standalone_query,
                         embed_model=embed_model,
-                        k=top_k,
-                        rerank_top_k=rerank_top_k,
-                        rerank_method=rerank_method
+                        k=st.session_state.top_k,
+                        rerank_top_k=st.session_state.rerank_top_k,
+                        rerank_method=st.session_state.rerank_method
                     )
                 else:
-                    search_results = st.session_state.vector_store.similarity_search_with_score(query, k=top_k)
+                    search_results = st.session_state.vector_store.similarity_search_with_score(
+                        standalone_query, k=st.session_state.top_k
+                    )
                     results = []
                     for doc, score in search_results: 
                         results.append({
-                            "text": doc. page_content,
+                            "text": doc.page_content,
                             "metadata": doc.metadata,
                             "score": float(score),
-                            "combined_score":  float(score)
+                            "combined_score": float(score)
                         })
                 
                 if results:
@@ -487,90 +906,47 @@ if ask_button and query:
                         for r in results
                     ]
                     
-                    # Generate answer with automatic language detection (no language parameter)
-                    answer_text = answer_with_rag(query, retrieved_docs, chat_model)
-                    retrieved_results = results
+                    # Generate answer
+                    answer_text = answer_with_rag(query, retrieved_docs, st.session_state.chat_model)
                     
-                    # Extract and display references
+                    # Extract references
                     references = extract_references(retrieved_docs)
-                    st.session_state.references = references
+                    
+                    # Format answer with references
+                    if references:
+                        ref_text = "\n\n📚 **Referensi:**\n"
+                        for ref in references: 
+                            if ref['pages']:
+                                pages_str = ", ".join(map(str, ref['pages']))
+                                ref_text += f"- {ref['document']}, halaman {pages_str}\n"
+                            else:
+                                ref_text += f"- {ref['document']}\n"
+                        answer_text += ref_text
+                    
+                    # Save answer
+                    save_assistant_answer(
+                        session_id=session_id,
+                        answer=answer_text
+                    )
+                    
+                    # Add assistant message to chat
+                    st.session_state.chat_messages.append({
+                        "role": "assistant",
+                        "content": answer_text
+                    })
                 else:
-                    answer_text = "❌ No relevant content found / Konten relevan tidak ditemukan."
-            
+                    answer_text = "❌ Tidak menemukan konten yang relevan."
+                    st.session_state.chat_messages.append({
+                        "role": "assistant",
+                        "content": answer_text
+                    })
+                
+                st.rerun()
+                
             except Exception as e: 
-                st.error(f"Error during search / Kesalahan saat pencarian: {str(e)}")
-                st.exception(e)
-
-# ========== Display Results ==========
-if answer_text or retrieved_results:
-    col1, col2 = st. columns([1, 1])
-    
-    with col1:
-        st. subheader("💡 Answer / Jawaban")
-        if answer_text:
-            st.markdown(f"<div class='answer-box'>{answer_text}</div>", unsafe_allow_html=True)
-            
-            # Display references if available
-            if hasattr(st.session_state, 'references') and st.session_state.references:
-                st.markdown("---")
-                st.markdown("**📚 Document References / Referensi Dokumen:**")
-                for ref in st. session_state.references:
-                    if ref['pages']:
-                        pages_str = ", ".join(map(str, ref['pages']))
-                        st.markdown(f"- **{ref['document']}**, halaman/page {pages_str}")
-                    else: 
-                        st.markdown(f"- **{ref['document']}**")
-        else:
-            st.caption("Answer will appear here / Jawaban akan muncul di sini.")
-    
-    with col2:
-        st.subheader("📄 Retrieved Content / Konten yang Ditemukan")
-        if retrieved_results:
-            snippet_rows = []
-            for rank, r in enumerate(retrieved_results, 1):
-                content_type = r["metadata"].get("content_type", "text").upper()
-                page_num = r["metadata"].get("page_number")
-                page_display = f" (Hal.  {page_num})" if page_num else ""
-                
-                if enable_reranking and 'original_score' in r:
-                    score_display = f"🎯 {r['combined_score']:.4f} (S:{r['original_score']:.3f} K:{r['keyword_score']:.3f})"
-                else:
-                    score_display = f"{r. get('combined_score', r['score']):.4f}"
-                
-                snippet_rows.append({
-                    "Rank": rank,
-                    "Type": content_type,
-                    "Document": r["metadata"]["doc_id"] + page_display,
-                    "Score": score_display,
-                    "Content": r["text"][: 300] + ("..." if len(r["text"]) > 300 else "")
+                error_msg = f"❌ Error: {str(e)}"
+                st.session_state.chat_messages.append({
+                    "role": "assistant",
+                    "content": error_msg
                 })
-            
-            df_snippets = pd.DataFrame(snippet_rows)
-            st.dataframe(df_snippets, use_container_width=True)
-            
-            csv_data = df_snippets.to_csv(index=False).encode('utf-8')
-            st.download_button(
-                label="⬇️ Download Retrieved Content (CSV)",
-                data=csv_data,
-                file_name=f"retrieved_content_{datetime. now().strftime('%Y%m%d_%H%M%S')}.csv",
-                mime="text/csv",
-                use_container_width=True
-            )
-        else:
-            st.caption("Retrieved content will appear here / Konten yang ditemukan akan muncul di sini.")
-
-# ========== Reranking Info ==========
-if enable_reranking and retrieved_results:
-    with st.expander("ℹ️ Reranking Details"):
-        st.markdown(f"""
-        **Reranking Method:** `{rerank_method}`
-        
-        - **Initial Retrieval:** {rerank_top_k} candidates
-        - **Final Results:** {top_k} documents
-        - **Scoring:**
-            - `S` = Semantic similarity (vector distance)
-            - `K` = Keyword overlap score
-            - `🎯` = Combined score (70% S + 30% K for hybrid)
-        
-        **Content Types:** Text, Tables, Images
-        """)
+                st.rerun()
