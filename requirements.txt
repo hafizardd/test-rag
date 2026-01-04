@@ -1,6 +1,7 @@
 # Core
 tqdm>=4.66.0
-numpy>=1.26.0
+onnx==1.18.0
+numpy>=1.26.0,<2.0.0
 pandas>=2.2.0
 
 # Vector DB
