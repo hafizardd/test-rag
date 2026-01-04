@@ -1,0 +1,64 @@
+feat: migrate from FAISS to Supabase vector store with enhanced chat history
+
+BREAKING CHANGES:
+- Replace FAISS vector store with Supabase pgvector implementation
+- Migrate SQLite chat history to PostgreSQL (Supabase)
+- Remove LangChain FAISS dependencies
+
+Core Changes:
+
+Vector Store Migration:
+- Replace FAISS + LangChain with native Supabase pgvector integration
+- Add SupabaseVectorStore class with methods: add_documents, similarity_search, delete_by_doc_id, delete_all, get_all_doc_ids, get_document_count, document_exists
+- Implement RPC-based similarity search using pgvector's cosine distance
+- Remove local file-based persistence (Memory/) in favor of cloud storage
+
+Chat History Enhancement:
+- Migrate from SQLite to PostgreSQL (Supabase) for chat history
+- Add database connection pooling configuration
+- Add session timestamp tracking (created_at, updated_at)
+- Implement message history limit (last 10 messages) for reformulation
+- Add clear_chat_history() and get_all_sessions() functions
+- Improve reformulate_question() with better prompts and validation
+
+Question Reformulation Improvements:
+- Enhanced system prompts with clearer examples
+- Add query length validation (reject if 3x original length)
+- Better handling of standalone vs contextual questions
+- Add debug logging for reformulation process
+
+RAG Answer Generation:
+- Add chat_history parameter to answer_with_rag()
+- Implement dual-context RAG: documents (facts) + history (conversation context)
+- Add chat history summarization (last 6 messages)
+- Improve system prompts to handle follow-up questions
+- Add results_to_doc_chunks() helper function
+
+Streamlit UI Updates:
+- Add Supabase connection status indicator
+- Add "Clear Docs" button to remove all documents
+- Improve document duplicate detection
+- Add existing document display in upload modal
+- Remove local vector store auto-loading
+- Change session ID from UUID to persistent "default_user_session"
+- Remove unused imports (pandas, FAISS, LangChain)
+
+Dependencies:
+- Add: supabase, psycopg2-binary
+- Add: PyPDF2, unstructured[all-docs], groq
+- Remove: LangChain FAISS wrapper dependencies
+
+Configuration:
+- Add environment variable loading from .env with explicit path
+- Add get_supabase_client() function
+- Add database URL builder from Supabase credentials
+- Add connection string masking for security
+
+Fixes:
+- Fix spacing issues in imports and code formatting
+- Remove unused variables and imports
+- Add proper error handling for Supabase operations
+- Add type hints consistency
+
+This migration enables cloud-based vector storage, better scalability, and
+improved conversation context handling for follow-up questions.

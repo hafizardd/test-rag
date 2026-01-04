@@ -9,8 +9,11 @@ faiss-cpu>=1.8.0
 # Data / PDFs
 datasets>=2.20.0
 pypdf>=4.2.0
+PyPDF2
 pdfplumber>=0.11.0
 python-docx
+unstructured[all-docs]
+
 # App
 streamlit>=1.35.0
 
@@ -24,3 +27,8 @@ ipykernel>=6.29.0
 langchain>=0.1.0,<0.2.0
 langchain-openai>=0.0.2,<0.1.0
 langchain-community>=0.0.10,<0.1.0
+sentence-transformers
+groq
+
+supabase
+psycopg2-binary
