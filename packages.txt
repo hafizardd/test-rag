@@ -1,0 +1,4 @@
+tesseract-ocr
+poppler-utils
+ffmpeg
+libmagic-dev
